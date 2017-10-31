@@ -15,30 +15,32 @@ class ItemsViewController: UITableViewController {
     @IBAction func addNewItem(_ sender: UIButton){
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
-
+        var indexGreater : Int = 0
+        var indexLess : Int = 0
+        
         // Figure out where that item is in the array
 
         if newItem.valueInDollars > 50
         {
             if let index = itemStore.allItems.index(of: newItem)
             {
-                let indexPath = IndexPath(row: index, section: 0)
+                let indexPath = IndexPath(row: indexGreater, section: 0)
                 // Insert this new row into the table
                 tableView.insertRows(at: [indexPath], with: .automatic)
+                indexGreater += 1
             }
-            }
+        }
         else
         {
             if let index = itemStore.allItems.index(of: newItem)
             {
-                let indexPath = IndexPath(row: index, section: 1)
+                let indexPath = IndexPath(row: indexLess, section: 1)
                 // Insert this new row into the table
                 tableView.insertRows(at: [indexPath], with: .automatic)
+                indexLess += 1
             }
         }
     }
-
-        
     
     @IBAction func toggleEditingMode(_ sender: UIButton){
         if isEditing {
